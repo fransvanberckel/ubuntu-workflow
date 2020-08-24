@@ -54,7 +54,6 @@ First, before you start running the workers workflow, you need to make adjustmen
 
 - ubuntu/focal.yml
 - ubuntu/hardware.json
-- ubuntu/pack_grml_tar_gz.sh
 - ubuntu/build_and_push_images.sh
 - ubuntu/create_tink_workflow.sh
 
