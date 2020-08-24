@@ -52,7 +52,7 @@ I am open for cloud instances to test, when they become available.
 
 First, before you start running the workers workflow, you need to make adjustments to, where needed ...
 
-- ubuntu/bullseye.yml
+- ubuntu/focal.yml
 - ubuntu/hardware.json
 - ubuntu/verify_json_tweaks.sh
 - ubuntu/pack_grml_tar_gz.sh
