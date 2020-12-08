@@ -1,0 +1,35 @@
+name: build-containers
+
+on: push
+
+env:
+  registry: docker.pkg.github.com
+  origin: ubuntu:focal
+
+jobs:
+  amd64:
+    name: Build containers for amd64
+    runs-on: ubuntu-20.04	
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker images
+        run: |
+          base="$GITHUB_REPOSITORY/base:$GITHUB_RUN_ID"
+          docker build -t $registry/$GITHUB_REPOSITORY/base:$GITHUB_RUN_ID 00-base/ --build-arg IMAGE=$origin
+          docker build -t $registry/$GITHUB_REPOSITORY/disk-wipe:$GITHUB_RUN_ID 01-disk-wipe/ --build-arg REGISTRY=$registry --build-arg IMAGE=$base
+          docker build -t $registry/$GITHUB_REPOSITORY/disk-partition:$GITHUB_RUN_ID 02-disk-partition/ --build-arg REGISTRY=$registry --build-arg IMAGE=$base
+          docker build -t $registry/$GITHUB_REPOSITORY/install-root-fs:$GITHUB_RUN_ID 03-install-root-fs/ --build-arg REGISTRY=$registry --build-arg IMAGE=$base
+          docker build -t $registry/$GITHUB_REPOSITORY/cloud-init:$GITHUB_RUN_ID 04-cloud-init/ --build-arg REGISTRY=$registry --build-arg IMAGE=$base
+        working-directory: ubuntu
+
+      - name: Publish Docker images
+        run: |
+          docker login $registry -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+
+          docker push $registry/$GITHUB_REPOSITORY/disk-wipe:$GITHUB_RUN_ID
+          docker push $registry/$GITHUB_REPOSITORY/disk-partition:$GITHUB_RUN_ID
+          docker push $registry/$GITHUB_REPOSITORY/install-root-fs:$GITHUB_RUN_ID
+          docker push $registry/$GITHUB_REPOSITORY/cloud-init:$GITHUB_RUN_ID
