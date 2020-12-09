@@ -34,7 +34,7 @@ ubuntu-workflow/
     └── verify_json_tweaks.sh
 ```
 
-About the Tinkerbell Ubuntu workflow it's based on Grml-debootstrap. It doesn't try to process disk images any more. Just installing old plain deb packages. Because of the need to setup the same packages over and over again, (especifically in cace of installing multiple Ubuntu instances) this workflow has a dependency on apt-cacher-ng. It doesn't work without! It uses the default port 3142. And cache all the deb packages nicely.
+About the Tinkerbell Ubuntu workflow it's based on Grml-debootstrap. It doesn't try to process disk images any more. Just installing old plain deb packages. Because of the need to setup the same packages over and over again, (especifically in cace of installing multiple Ubuntu instances) this workflow has a dependency on apt-cacher-ng, which is installed as a Docker container. It doesn't work without! It uses the default port 3142. And cache all the deb packages nicely.
 
 There's one available writen for [Debian](https://github.com/fransvanberckel/debian-workflow) as well.
 
