@@ -5,8 +5,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-apt-get -qq --yes --no-install-recommends install whois debootstrap 2>/dev/null
-
 docker-compose up -d
 
 registry='192.168.1.1'
