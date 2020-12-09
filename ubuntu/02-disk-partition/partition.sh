@@ -15,16 +15,13 @@ touch $metadata
 curl --connect-timeout 60 http://$MIRROR_HOST:50061/metadata > $metadata
 check_required_arg "$metadata" 'metadata file' '-M'
 
-declare class && set_from_metadata class 'facility.plan_slug' <"$metadata"
 declare deprovision_fast="false"
-declare facility && set_from_metadata facility 'facility.facility_code' <"$metadata"
-declare distro && set_from_metadata distro 'instance.operating_system_version.distro' <"$metadata"
-declare os_slug && set_from_metadata os_slug 'instance.operating_system_version.os_slug' <"$metadata"
-declare os_codename && set_from_metadata os_codename 'instance.operating_system_version.os_codename' <"$metadata"
+declare distro && set_from_metadata distro 'operating_system_version.distro' <"$metadata"
+declare os_slug && set_from_metadata os_slug 'operating_system_version.os_slug' <"$metadata"
+declare os_codename && set_from_metadata os_codename 'operating_system_version.os_codename' <"$metadata"
 declare preserve_data="false"
-declare pwhash && set_from_metadata pwhash 'instance.crypted_root_password' <"$metadata"
-declare hostname && set_from_metadata hostname 'instance.hostname' <"$metadata"
-declare state && set_from_metadata state 'state' <"$metadata"
+declare pwhash && set_from_metadata pwhash 'crypted_root_password' <"$metadata"
+declare hostname && set_from_metadata hostname 'hostname' <"$metadata"
 
 echo "Number of drives found: ${#disks[*]}"
 if ((${#disks[*]} != 0)); then
@@ -53,7 +50,7 @@ cprconfig=/tmp/config.cpr
 cprout=/statedir/cpr.json
 
 echo "Using default image since no cpr_url provided"
-jq -c '.instance.storage' "$metadata" >$cprconfig
+jq -c '.storage' "$metadata" >$cprconfig
 
 if ! [[ -f /statedir/disks-partioned-image-extracted ]]; then
         jq . $cprconfig
