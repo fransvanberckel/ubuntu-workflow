@@ -31,7 +31,6 @@ ubuntu-workflow/
     ├── create_tink_workflow.sh
     ├── focal.yml
     ├── hardware.json
-    ├── pack_grml_tar_gz.sh
     └── verify_json_tweaks.sh
 ```
 
@@ -61,8 +60,6 @@ Next verify, build, pack & create the environment.
 ```
 $ ./verify_json_tweaks.sh
 $ sudo ./build_and_push_images.sh
-$ sudo ./pack_grml_tar_gz.sh
-$ sudo cp ./grml-ubuntu.tar.gz /var/tinkerbell/state/webroot/misc/osie/current/
 $ sudo ./create_tink_workflow.sh
 
 Enter new root password:
