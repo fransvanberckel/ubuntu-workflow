@@ -31,16 +31,13 @@ fi
 ephemeral=/workflow/data.json
 echo "{}" > $ephemeral
 echo $(jq ". + {\"arch\": \"$arch\"}" <<< cat $ephemeral) > $ephemeral
-echo $(jq ". + {\"class\": \"$class\"}" <<< cat $ephemeral) > $ephemeral
 echo $(jq ". + {\"deprovision_fast\": \"$deprovision_fast\"}" <<< cat $ephemeral) > $ephemeral
-echo $(jq ". + {\"facility\": \"$facility\"}" <<< cat $ephemeral) > $ephemeral
 echo $(jq ". + {\"distro\": \"$distro\"}" <<< cat $ephemeral) > $ephemeral
 echo $(jq ". + {\"os_slug\": \"$os_slug\"}" <<< cat $ephemeral) > $ephemeral
 echo $(jq ". + {\"os_codename\": \"$os_codename\"}" <<< cat $ephemeral) > $ephemeral
 echo $(jq ". + {\"preserve_data\": \"$preserve_data\"}" <<< cat $ephemeral) > $ephemeral
 echo $(jq ". + {\"pwhash\": \"$pwhash\"}" <<< cat $ephemeral) > $ephemeral
 echo $(jq ". + {\"hostname\": \"$hostname\"}" <<< cat $ephemeral) > $ephemeral
-echo $(jq ". + {\"state\": \"$state\"}" <<< cat $ephemeral) > $ephemeral
 
 jq . $ephemeral
 
