@@ -50,7 +50,7 @@ cprconfig=/tmp/config.cpr
 cprout=/statedir/cpr.json
 
 echo "Using default image since no cpr_url provided"
-jq -c '.instance.storage' "$metadata" >$cprconfig
+jq -c '.storage' "$metadata" >$cprconfig
 
 if ! [[ -f /statedir/disks-partioned-image-extracted ]]; then
         jq . $cprconfig
